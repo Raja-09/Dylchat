@@ -237,7 +237,7 @@ async function renderConversations() {
 
                 } else {
                     // Nouvelle conversation
-                    $(`#contact-message-${i}`).text("Nouvelle conversation");
+                    $(`#contact-message-${i}`).text("New conversation");
                     $(`#contact-hour-${i}`).text("-")
                 }
             }

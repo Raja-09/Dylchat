@@ -1,10 +1,10 @@
-# Dylchat
+# CiText
 
 [![SchoolProject](https://img.shields.io/badge/School-project-83BD75?labelColor=B4E197&style=for-the-badge)]()
 [![Javascript](https://img.shields.io/badge/Made%20with-Javascript-B22727?labelColor=EE5007&style=for-the-badge)]()
 [![Socket](https://img.shields.io/badge/Uses-Socket.io-E4AEC5?labelColor=FFC4DD&style=for-the-badge)]()
 
-Web app de **messagerie instantée chiffrée de bout en bout** disponible sur 🔗 [dylchat.fr](https://dylchat.fr).
+Web app de **messagerie instantée chiffrée de bout en bout** disponible sur 🔗 [CiText.fr](https://CiText.fr).
 
 Conversation de groupe, chiffrement end-to-end, messages privés et gestion du compte. 
 
@@ -40,7 +40,7 @@ Conversation de groupe, chiffrement end-to-end, messages privés et gestion du c
     API_HOST=localhost
     SSL=false
 
-    MONGO_URI= mongodb://localhost:27017/dylchat
+    MONGO_URI= mongodb://localhost:27017/CiText
 
     TOKEN_KEY=random_string
     ```
