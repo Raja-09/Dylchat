@@ -57,7 +57,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title fw-bold">Ajouter une conversation
+                    <h4 class="modal-title fw-bold">Add a conversation
                         <h4>
                 </div>
 
@@ -71,8 +71,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button id="openEndToEndPopup" type="button" class="btn btn-default">🔒 Conversation chiffrée</button>
-                            <button id="addContactConfirm" type="submit" class="btn btn-primary">Ajouter sans chiffrement</button>
+                            <button id="openEndToEndPopup" type="button" class="btn btn-default">🔒 Encrypted conversation</button>
+                            <button id="addContactConfirm" type="submit" class="btn btn-primary">Add without encryption</button>
                         </div>
 
                     </form>
@@ -90,7 +90,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                    <h4 class="modal-title fw-bold">🔒 Créer une conversation chiffrée <span class="gray">– Échange de clés Diffie-Hellman authentifié</span>
+                    <h4 class="modal-title fw-bold">🔒 Create an encrypted conversation <span class="gray">Authenticated Diffie-Hellman key exchange</span>
                         <h4>
                 </div>
 
@@ -115,9 +115,9 @@
                             <!-- </div> -->
                         </div>
                         <!-- ToDo: ajouter les champs nécessaires au Diffie-Hellman -->
-                        <button id="cancelDiffieHellman" type="submit" class="btn btn-default">Annuler le protocole</button>
-                        <button id="readyDiffieHellman" type="submit" class="btn btn-primary">Je suis prêt</button>
-                        <button id="terminateDiffieHellman" class="btn btn-danger" data-dismiss="modal" hidden="hidden">Fermer la fenêtre</button>
+                        <button id="cancelDiffieHellman" type="submit" class="btn btn-default">Cancel protocol</button>
+                        <button id="readyDiffieHellman" type="submit" class="btn btn-primary">I'm ready</button>
+                        <button id="terminateDiffieHellman" class="btn btn-danger" data-dismiss="modal" hidden="hidden">Close window</button>
                     </form>
                     <small id="diffieHellmanError" class="form-text text-danger fw-bold invisible">Error placeholder</small>
 
@@ -131,7 +131,7 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-body">
-                    <p id="notifDHText">Un tel souhaite engager une conversation privée avec vous.</p>
+                    <p id="notifDHText">So-and-so wants to start a private conversation with you.</p>
                 </div>
                 <div class="modal-footer">
                     <button id="rejectDiffieHellman" type="button" class="btn btn-default">Refuser</button>
@@ -147,7 +147,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title fw-bold">🔓 Déverrouillage des conversations privées
+                    <h4 class="modal-title fw-bold">🔓 Unlocking private conversations
                         <h4>
                 </div>
 
@@ -156,16 +156,15 @@
 
                         <div class="form-group">
                             <label for="AESKeysInput" class="control-label">
-                                Les clés AES doivent être saisies sous la forme :<br>
-                                <code class="gray">"IDConv1": "Clé AES1", "IDConv2": "Clé AES2"</code>
+                                AES keys must be entered in the form:<br>
+                                <code class="gray">"IDConv1": "AES1 Key", "IDConv2": "AES2 Key"</code>
                             </label>
                             <textarea id="AESKeysInput" class="form-control"></textarea>
                         </div>
 
-                        <p class="gray">Vous pouvez modifier vos clés à tout moment depuis votre <span class="text-link-blue" onclick="">profil</span>.</p>
-
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                        <button id="AESKeysConfirm" type="submit" class="btn btn-primary">Déchiffrer les conversations</button>
+                        <p class="gray">You can change your keys at any time from your <span class="text-link-blue" onclick="">profile</span>.</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button id="AESKeysConfirm" type="submit" class="btn btn-primary"> Decipher conversations</button>
 
                     </form>
                     <small id="AESKeysError" class="form-text text-danger fw-bold invisible">Error placeholder</small>
@@ -213,7 +212,7 @@
 
 
                     <div id="contact-list" class="row sideBar">
-                        <!-- Liste de contacts -->
+                  
 
                         <div id="contact-0" class="row sideBar-body">
                             <div class="sideBar-main">
@@ -229,7 +228,7 @@
                             <div class="sideBar-main">
                                 <div class="row">
                                     <div class="col-sm-12 col-xs-12 sideBar-lastMessage">
-                                        <span class="lastMessage-meta">Dylan: Ouais les gars</span>
+                                        <span class="lastMessage-meta"></span>
                                     </div>
                                 </div>
                             </div>
@@ -270,17 +269,17 @@
                 <!-- Accueil -->
                 <div id="accueil" class="row accueil-body">
                     <div class="accueil-main">
-                        <p class="text-menu">Clique sur une conversation pour commencer.</p>
+                        <p class="text-menu">Click on a conversation to start.</p>
                         <break />
                         <p class="text-menu">
-                            Tu peux aussi <span class="text-link-blue" onclick="openAddContactPopup()">ajouter un contact</span> ou <span class="text-link-blue" onclick="openGeneralChat()">rejoindre les Grandes Discussions</span> !
+                            You can also <span class="text-link-blue" onclick="openAddContactPopup()">add contact</span> or <span class="text-link-blue" onclick="openGeneralChat()">join the Great Discussions</span>!
                         </p>
                     </div>
                 </div>
 
                 <div id="footer" class="row footer-body">
                     <div class="footer-main">
-                        <p class="text-menu">Dylchat – Where everything starts</p>
+                        <p class="text-menu"> Where everyone talks</p>
                     </div>
                 </div>
 
@@ -297,7 +296,7 @@
                     </div>
 
                     <div class="col-sm-8 col-xs-7 heading-name">
-                        <span id="chat-name" class="heading-name-meta">Elyn</span>
+                        <span id="chat-name" class="heading-name-meta">Raja</span>
                         <span class="heading-online">Online</span>
                     </div>
                     <div class="col-sm-1 col-xs-1 heading-dot pull-right">
@@ -321,8 +320,7 @@
                             <span id="chat-username-0" class="message-nick">Elyn</span>
                             <div class="receiver">
                                 <div class="message-text">
-                                    Hi, what are you doing?! Comment ça se passe quand le message est trop long ?
-                                </div>
+                                    Hi, what are you doing?! What happens when the message is too long?                                </div>
                                 <span class="message-time pull-right">
                                     17:21
                                 </span>
@@ -355,22 +353,17 @@
                         <input id="chat-box" type="text" class="write-message" placeholder="Écris ici ton message" /></input>
                     </div>
                     <!-- <div class="col-sm-1 col-xs-1 reply-send">
-                        <i class="fa fa-image fa-2x" aria-hidden="true"></i>
                     </div> -->
                     <div class="col-sm-2 col-xs-2 reply-send">
                         <i id="send" class="fa fa-paper-plane-o" aria-hidden="true" onclick="sendMessage()"></i>
                     </div>
                 </div>
-                <!-- Fin barre d'envoi de message -->
                 </section>
 
             </div>
-            <!-- Fin partie droite-->
 
         </div>
-        <!-- Fin app one -->
     </div>
-    <!-- Fin container app -->
 
 </body>
 

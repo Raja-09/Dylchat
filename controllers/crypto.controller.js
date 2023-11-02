@@ -16,10 +16,10 @@ function getPrime(min, max) {
 }
 
 
-let DH = crypto.createDiffieHellman(20); // bit length // todo : pourquoi ça marche pas avec + de bits ?
+let DH = crypto.createDiffieHellman(1000); // bit length // todo : pourquoi ça marche pas avec + de bits ?
 const p = parseInt(DH.getPrime('hex'), 16);
 const g = parseInt(DH.getGenerator('hex'), 16);
-console.log("p:",p);
+console.log("p:", p);
 console.log("g:", g);
 
 exports.p = p;

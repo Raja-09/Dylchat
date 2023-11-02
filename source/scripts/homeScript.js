@@ -254,10 +254,10 @@ async function renderConversations() {
                     <div class="sideBar-main-alert">
                         <div class="row">
                             <div class="col-sm-8 col-xs-8 sideBar-alert">
-                                <span class="alert-meta"> 🔒 Vous avez ${stillEncrypted} conversation(s) chiffrée(s) </span>
+                                <span class="alert-meta"> 🔒 You have ${stillEncrypted} encrypted conversation(s) </span>
                             </div>
                             <div class="col-sm-8 col-xs-8 sideBar-alert">
-                                <span class="alert-meta text-link-blue" onclick="AESKeysPopup()"> Cliquer ici pour les déverrouiller </span>
+                                <span class="alert-meta text-link-blue" onclick="AESKeysPopup()"> Click here to unlock them </span>
                             </div>
                         </div>
                     </div>
@@ -466,7 +466,7 @@ function openAddContactPopup(event) {
 
         // Check si l'utilisateur a entré un pseudo
         if ($("#addContactInput").val().length == 0) {
-            $("#addContactError").text("Veuillez entrer l'identifiant de l'utilisateur à qui vous souhaitez écrire.");
+            $("#addContactError").text("Please enter the username of the user you want to write to.");
             $("#addContactError").removeClass("invisible");
             return;
         }
@@ -518,7 +518,7 @@ function processDiffieHellman(data) {
     $('#generatedSymKey').val("");
 
     $('#diffieHellmanPopup').modal('show');
-    $('#otherUserDFProgress').text(`Clique sur "Je suis prêt" pour notifier ${data.user2}`);
+    $('#otherUserDFProgress').text(`Click on “Im ready” to notify"${data.user2}`);
 
     // ToDo après DH authentifié: si les clés sont déjà renseignées: les écrire dans publicKeyInput et privateKeyInput 
 
@@ -532,7 +532,7 @@ function processDiffieHellman(data) {
     $('#readyDiffieHellman').on('click', function(e) {
         e.preventDefault();
         $('#readyDiffieHellman').off('click');
-        $('#otherUserDFProgress').text(`En attente de ${data.user2}...`);
+        $('#otherUserDFProgress').text(`Waiting for ${data.user2}...`);
         // Calcul de la valeur publique A du DH
         let array = new Uint32Array(10);
         window.crypto.getRandomValues(array);
@@ -549,8 +549,8 @@ socket.on("acceptedDiffieHellman", async(data) => {
     $('#cancelDiffieHellman').hide();
     $('#terminateDiffieHellman').show();
 
-    $('#otherUserDFProgress').text(`La conversation chiffrée avec ${data.user2} a été créée.`);
-    $('#diffieHellmanError').text("Veillez à enregistrer la clé symétrique dans un fichier local de clés avant de fermer de cette fenêtre.");
+    $('#otherUserDFProgress').text(`The conversation encrypted with ${data.user2} has been created.`);
+    $('#diffieHellmanError').text("Be sure to save the symmetric key to a local keystore before closing this window.");
     $('#diffieHellmanError').removeClass("invisible");
     let secretKey = expmod(data.publicB, senderSecret, data.p);
 
@@ -574,7 +574,7 @@ socket.on("acceptedDiffieHellman", async(data) => {
 
 socket.on("notifDiffieHellman", (data) => {
     $('#notifDHPopup').modal('show');
-    $('#notifDHText').text(`${data.user1} souhaite engager une conversation privée avec vous.`)
+    $('#notifDHText').text(`${data.user1} would like to engage in a private conversation with you.`)
 
     $('#rejectDiffieHellman').on('click', function(e) {
         e.preventDefault();
@@ -628,12 +628,12 @@ function finishDiffieHellman(data, receiverSecret) {
 
     // ToDo: trouver un moyen de prévenir l'utilisateur que si il quitte, le protocole s'annule (et emit un cancelDiffieHellman)
     $('#diffieHellmanPopup').modal('show');
-    $('#otherUserDFProgress').text(`La conversation chiffrée avec ${data.user1} a été créée.`);
+    $('#otherUserDFProgress').text(`The conversation encrypted with ${data.user1} has been created.`);
     // Affichage de l'ID de conversation et de la clé symétrique 
     $('#generatedSymKey').val(`"${idChat}":  "${secretKey.toString(16)}", `);
     // Stockage de la paire en Map
     AESKeys.set(idChat, secretKey.toString(16));
-    $('#diffieHellmanError').text("Veillez à enregistrer la clé symétrique dans un fichier local de clés avant de fermer de cette fenêtre.");
+    $('#diffieHellmanError').text("Be sure to save the symmetric key to a local keystore before closing this window.");
     $('#diffieHellmanError').removeClass("invisible");
     renderConversations();
 }
@@ -667,7 +667,7 @@ function AESKeysPopup() {
         e.preventDefault();
 
         if (!$('#AESKeysInput').val().length) {
-            $("#AESKeysError").text("Veuillez saisir au minimum une clé AES pour valider.");
+            $("#AESKeysError").text("Please enter at least one AES key to validate");
             $("#AESKeysError").removeClass("invisible");
         }
 
@@ -690,7 +690,7 @@ function AESKeysPopup() {
             $('#AESKeysInput').val("");
             $('#AESKeysPopup').modal('hide');
         } else {
-            $("#AESKeysError").text("Le format est invalide.");
+            $("#AESKeysError").text("The format is invalid");
             $("#AESKeysError").removeClass("invisible");
         }
     })
@@ -752,7 +752,7 @@ function openChat(chat) {
     // Afficher le nom du destinaire
     activeConversationId = chat._id; // Set active conv ID
     if (chat.userId1 == null)
-        $("#chat-name").text("[Discussions] – Canal général");
+        $("#chat-name").text("[Discussions] – General Channel");
     else if (chat.userId1.username == myPseudo)
         $("#chat-name").text(chat.userId2.username);
     else

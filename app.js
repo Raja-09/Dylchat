@@ -86,7 +86,7 @@ const Conversation = require("./model/conversation");
 
 const CryptoJS = require('crypto-js');
 
-io.on('connection', async(socket) => { 
+io.on('connection', async (socket) => {
 
     // Check si le canal Discussions existe et le créer si non 
     const discussions = await Conversation.findOne({ userId1: null });
@@ -111,7 +111,7 @@ io.on('connection', async(socket) => {
     // ToDo: ne pas envoyer tous les messages (laisser l'user fetch les messages en cliquant sur une conv)
     sendAllStoredMessages(socket);
 
-    socket.on("newMessage", async(message) => {
+    socket.on("newMessage", async (message) => {
         let newMessage = new MessageModel(message);
         newMessage.save();
 
@@ -130,7 +130,7 @@ io.on('connection', async(socket) => {
 
         // Si chat général : envoyer le message à tous les clients connectés
         if (!conv.userId1) {
-            clientList.forEach(function(metadata, clientSocket) {
+            clientList.forEach(function (metadata, clientSocket) {
                 console.log("Sent to " + metadata.username);
                 clientSocket.emit("newMessage", message);
             });
@@ -138,7 +138,7 @@ io.on('connection', async(socket) => {
         // Sinon : l'envoyer seulement aux deux utilisateurs concernés
         else {
             // ToDo: mieux récupérer les users via la Map
-            clientList.forEach(function(metadata, clientSocket) {
+            clientList.forEach(function (metadata, clientSocket) {
                 if (metadata.id.equals(conv.userId1) || metadata.id.equals(conv.userId2)) {
                     console.log("Sent to " + metadata.username);
                     clientSocket.emit("newMessage", message);
@@ -147,10 +147,10 @@ io.on('connection', async(socket) => {
         }
     });
 
-    socket.on('newConversation', async(data) => {
+    socket.on('newConversation', async (data) => {
         // Transmet la nouvelle conversation aux 2 utilisateurs concernés
         socket.emit("newConversation");
-        clientList.forEach(function(metadata, clientSocket) {
+        clientList.forEach(function (metadata, clientSocket) {
             if (metadata.id.equals(data.userId2)) {
                 clientSocket.emit("newConversation");
             }
@@ -158,10 +158,10 @@ io.on('connection', async(socket) => {
     });
 
     // L'utilisateur 1 souhaite engager un DH avec l'utilisateur 2
-    socket.on('engageDiffieHellman', async(data) => {
+    socket.on('engageDiffieHellman', async (data) => {
         // diffieHellmanProtocol.push({userId1: data.userId1, userId2: data.userId2});
         // Envoi de la notification à user2
-        clientList.forEach(function(metadata, clientSocket) {
+        clientList.forEach(function (metadata, clientSocket) {
             if (metadata.id.equals(data.userId2)) {
                 clientSocket.emit("notifDiffieHellman", data);
                 console.log("DH notif sent to " + metadata.username);
@@ -170,21 +170,21 @@ io.on('connection', async(socket) => {
     });
 
     // L'utilisateur 2 a accepté le DH, il renvoie sa valeur de B à l'utilisateur A
-    socket.on('acceptedDiffieHellman', async(data) => {
+    socket.on('acceptedDiffieHellman', async (data) => {
         // Envoi de l'acceptation à user1
-        clientList.forEach(function(metadata, clientSocket) {
+        clientList.forEach(function (metadata, clientSocket) {
             if (metadata.id.equals(data.userId1)) {
                 clientSocket.emit("acceptedDiffieHellman", data);
             }
         });
     });
 
-    socket.on('cancelDiffieHellman', async(userId1, userId2) => {
+    socket.on('cancelDiffieHellman', async (userId1, userId2) => {
         // ToDo: cancelDiffieHellman supprime le couple dans le tableau diffieHellmanProtocol
     });
 
     // À la fermeture du socket: passe l'utilisateur hors ligne
-    socket.on('disconnect', async() => {
+    socket.on('disconnect', async () => {
         console.log("%s has disconnected", clientList.get(socket).username);
         await User.updateOne({ _id: clientList.get(socket).id }, { $set: { status: 0 } });
         clientList.delete(socket);
@@ -199,16 +199,16 @@ async function sendAllStoredMessages(socket) {
     var convIds = new Array();
     await Conversation.find({
         $or: [{ userId1: null }, { userId1: metadata.id }, { userId2: metadata.id }]
-    }).then(async function(convs) {
-        convs.forEach(function(conv) {
+    }).then(async function (convs) {
+        convs.forEach(function (conv) {
             convIds.push(conv._id);
         });
 
         // Get uniquement les messages des chats de l'utilisateurs 
-        await MessageModel.find({ idchat: { $in: convIds } }).then(function(msgs) {
+        await MessageModel.find({ idchat: { $in: convIds } }).then(function (msgs) {
 
             // Tri des messages par timestamp
-            msgs.sort(function(a, b) {
+            msgs.sort(function (a, b) {
                 return a.time - b.time
             });
 
